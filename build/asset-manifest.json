@@ -1,0 +1,14 @@
+{
+  "main.css": "static/css/main.1940511a.css",
+  "main.css.map": "static/css/main.1940511a.css.map",
+  "main.js": "static/js/main.9a411ec5.js",
+  "main.js.map": "static/js/main.9a411ec5.js.map",
+  "static\\media\\back.mp3": "static/media/back.0ee66d98.mp3",
+  "static\\media\\failure.mp3": "static/media/failure.7bb1881b.mp3",
+  "static\\media\\front.mp3": "static/media/front.36eb7b12.mp3",
+  "static\\media\\left.mp3": "static/media/left.19da06f0.mp3",
+  "static\\media\\middle.mp3": "static/media/middle.324be680.mp3",
+  "static\\media\\right.mp3": "static/media/right.e0496b7c.mp3",
+  "static\\media\\success.mp3": "static/media/success.3e1e24bb.mp3",
+  "static\\media\\tick.mp3": "static/media/tick.9133cb3c.mp3"
+}
