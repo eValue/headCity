@@ -77,6 +77,7 @@
     padding: 5px;
     background: white;
     border: 0;
+    color: #00007F;
     border-bottom: 2px solid lightgrey;
 }
 
@@ -94,7 +95,7 @@
 }
 
 .options button:active {
-    border-color: black;
+    border-color: #0000FF;
 }
 
 .options button:focus {

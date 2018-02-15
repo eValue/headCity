@@ -37,7 +37,7 @@ class Game extends Component {
             objCountry: '',
             city: '',
 
-            // display wordSoccer
+            // display
             display: true,
 
             // value input
@@ -48,7 +48,6 @@ class Game extends Component {
 
             // disabled input
             disabled: false,
-
         };
 
         this.turnVoices = this.turnVoices.bind(this);
@@ -114,6 +113,7 @@ class Game extends Component {
             return (currentTime + sec) < 0 ? 0 : currentTime + sec;
         }
     }
+
     // remove listeners
     removeListeners(){
         document.removeEventListener('keydown', this.handleKeyDown);
@@ -158,13 +158,11 @@ class Game extends Component {
             case 18: // alt read question
                 if (e.keyCode === 18) {
                     e.preventDefault();
-                    const onEnd = () => {
                         this.setState({
-                            timerRun: true
+                            timerRun: false
                         });
-                    };
                     if (!this.state.voices) return;
-                    window.responsiveVoice.speak('Jaké je hlavní město ' + this.state.country, "Czech Female", {onend: onEnd});
+                    this.reader();
                 }
                 break;
 
@@ -186,7 +184,7 @@ class Game extends Component {
                     });
 
                     if(this.state.soundName === "success") {
-                        window.responsiveVoice.speak("Jaké je hlavní město " + this.state.country, "Czech Female",{onend: this.onEnd});
+                        this.reader();
                     }
 
                     if (this.state.soundName === "failure") {
@@ -194,7 +192,6 @@ class Game extends Component {
                     }
                 }
                 break;
-
             default:
                 break;
         }
@@ -205,7 +202,7 @@ class Game extends Component {
         let correctAnswer = this.state.city;
         let myAnswer = this.state.inputValue;
         let newScore = 10;
-        let newTime = 2;
+        let newTime = 5;
         if (myAnswer === correctAnswer) {
             this.setState({
                 soundStatus: 'play',
@@ -225,6 +222,12 @@ class Game extends Component {
         }
     }
 
+    // reader for sentences
+    reader() {
+        window.responsiveVoice.speak("Jaké je hlavní město " + this.state.country, "Czech Female",{onend: this.onEnd});
+    }
+
+    // function onend
     onEnd() {
         this.setState({
             timerRun: true
