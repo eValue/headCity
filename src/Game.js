@@ -43,11 +43,11 @@ class Game extends Component {
             // value input
             inputValue: '',
 
-            // score
-            score: 0,
-
             // disabled input
             disabled: false,
+
+            // score
+            score: 0,
         };
 
         this.turnVoices = this.turnVoices.bind(this);
@@ -61,7 +61,6 @@ class Game extends Component {
         this.handleKeyUp = this.handleKeyUp.bind(this);
         // new game function
         this.newGame = this.newGame.bind(this);
-
         this.handleFinishedPlaying = this.handleFinishedPlaying.bind(this);
         this.onEnd = this.onEnd.bind(this);
     }
@@ -130,7 +129,7 @@ class Game extends Component {
 
     // generate random object from json array
     generateNewCountry(Arr) {
-        let randomNumber = Math.floor(Math.random() * Arr.length)+1;
+        let randomNumber = Math.floor(Math.random() * Arr.length);
         let generateCountry = Arr[randomNumber];
         return generateCountry;
     }
@@ -145,10 +144,11 @@ class Game extends Component {
 
     // handle keyDown - move player by 'Arrow keys', 'Alt' to read possible directions
     handleKeyDown(e) {
-        if (!this.state.playing || !this.state.timerRun) {
-            if (e.keyCode === 82) {
-                e.preventDefault(); // cancel focus event from turn voices button
+        if (!this.state.playing && !this.state.timerRun) {
+            if (e.keyCode === 82) { // new game if timeRun and playing = false
+                e.preventDefault();
                 this.newGame();
+                ReactDOM.findDOMNode(this.input).focus();
             } else {
                 return;
             }
@@ -227,7 +227,7 @@ class Game extends Component {
         window.responsiveVoice.speak("Jaké je hlavní město " + this.state.country, "Czech Female",{onend: this.onEnd});
     }
 
-    // function onend
+    // function onEnd
     onEnd() {
         this.setState({
             timerRun: true
@@ -249,20 +249,23 @@ class Game extends Component {
     // init new game
     newGame() {
         let objCountry = this.generateNewCountry(City);
-        ReactDOM.findDOMNode(this.input).focus();
         let city = objCountry.headCity;
         let country = objCountry.country;
 
         this.setState({
-            playing: true,
+            playing: false,
             seconds: SECONDS,
-            timerRun: true,
+            timerRun: false,
             score: 0,
             objCountry: objCountry,
             country: country,
             city: city,
             disabled: false
         }, () => {
+            this.setState({
+                playing: true,
+                timerRun: true
+            });
             window.responsiveVoice.speak('Jaké je hlavní město ' + this.state.country, "Czech Female", {onend: this.onEnd});
 
             this.buttonRefresh.blur();
@@ -287,7 +290,6 @@ class Game extends Component {
                 disabled: true
             });
             window.responsiveVoice.speak("Konec hry " + this.state.score + " bodů", "Czech Female");
-            this.removeListeners();
         }
     }
 
@@ -343,7 +345,6 @@ class Game extends Component {
                 <div className="word__container">
                     <form>
                         <input id="myWord" type="text"
-
                                disabled={this.state.disabled}
                                autoFocus="autoFocus"
                                autoComplete="off"

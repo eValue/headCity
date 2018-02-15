@@ -1,8 +1,8 @@
 {
-  "name": "WordSoccer",
+  "name": "HeadsCity",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://davids-inflexity.github.io/WordSoccerEasy/",
+  "homepage": "https://eValue.github.io/headCity/",
   "dependencies": {
     "diacritic": "0.0.2",
     "json-loader": "^0.5.4",
